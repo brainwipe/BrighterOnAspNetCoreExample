@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Commands;
+using Domain.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Paramore.Brighter.AspNetCore;
 
 namespace BrighterOnAspNetCore
 {
@@ -28,6 +31,9 @@ namespace BrighterOnAspNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddBrighter()
+                .HandlersFromAssemblies(typeof(CreateValueCommandHandler).Assembly);
+
             services.AddMvc();
         }
 
